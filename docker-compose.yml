@@ -1,0 +1,24 @@
+services:
+
+  # ── ChatOps AI Bot ─────────────────────────────────────────────────────────
+  chatops:
+    build: .
+    container_name: chatops_ai
+    restart: unless-stopped
+    env_file: .env
+    volumes:
+      # Akses Docker host supaya bot bisa kontrol container lain
+      - /var/run/docker.sock:/var/run/docker.sock
+      # Persist audit log
+      - ./audit.db:/app/audit.db
+    networks:
+      - chatops_net
+    healthcheck:
+      test: ["CMD", "python", "-c", "import slack_bolt; print('ok')"]
+      interval: 30s
+      timeout: 10s
+      retries: 3
+
+networks:
+  chatops_net:
+    driver: bridge

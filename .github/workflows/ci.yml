@@ -1,0 +1,60 @@
+name: CI — ChatOps AI
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+    branches: [main]
+
+jobs:
+
+  # ── Lint & Syntax Check ────────────────────────────────────────────────────
+  lint:
+    name: 🔍 Lint & Syntax Check
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout kode
+        uses: actions/checkout@v4
+
+      - name: Setup Python 3.13
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.13"
+          cache: "pip"
+
+      - name: Install dependencies
+        run: pip install ruff
+
+      - name: Cek syntax semua file Python
+        run: |
+          python -m py_compile main.py
+          python -m py_compile bot/slack_handler.py
+          python -m py_compile ai/orchestrator.py
+          python -m py_compile ai/tools/health_tool.py
+          python -m py_compile ai/tools/log_tool.py
+          python -m py_compile ai/tools/docker_tool.py
+          python -m py_compile ai/tools/scale_tool.py
+          python -m py_compile ai/tools/portomoran_tool.py
+          python -m py_compile ai/tools/github_tool.py
+          python -m py_compile ai/tools/healthcheck_tool.py
+          echo "✅ Semua file syntax OK"
+
+      - name: Ruff lint
+        run: ruff check . --ignore E501,F401
+
+  # ── Docker Build Check ─────────────────────────────────────────────────────
+  docker:
+    name: 🐳 Docker Build Check
+    runs-on: ubuntu-latest
+    needs: lint
+
+    steps:
+      - name: Checkout kode
+        uses: actions/checkout@v4
+
+      - name: Build Docker image
+        run: docker build -t chatops-ai:test .
+
+      - name: Verifikasi image berhasil dibuat
+        run: docker images chatops-ai:test
