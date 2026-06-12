@@ -123,7 +123,6 @@ def build_response_block(
     Menggunakan Slack Block Kit supaya rapi dan konsisten.
     """
     icon_map = {"success": "✅", "error": "❌", "warning": "⚠️", "info": "ℹ️"}
-    color_map = {"success": "#2EB67D", "error": "#E01E5A", "warning": "#ECB22E", "info": "#36C5F0"}
 
     header_block: dict[str, Any] = {
         "type": "header",

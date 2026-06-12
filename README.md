@@ -8,7 +8,7 @@
 [![Python](https://img.shields.io/badge/Python-3.13-blue?logo=python)](https://python.org)
 [![LangGraph](https://img.shields.io/badge/LangGraph-latest-purple)](https://langchain-ai.github.io/langgraph/)
 [![Docker](https://img.shields.io/badge/Docker-ready-2496ED?logo=docker)](https://docker.com)
-[![License: MIT](https://img.shields.io/badge/License-MIT-green)](LICENSE)
+[![License: MIT](https://img.shields.io/badge/License-MIT-green)](LICENSE) 
 
 <!-- Demo GIF — rekam dengan screentogif.com lalu upload ke repo -->
 ![Demo ChatOps AI](docs/demo.gif)
