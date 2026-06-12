@@ -7,7 +7,7 @@ import logging
 import os
 
 from langchain_core.messages import HumanMessage
-from langchain_google_genai import ChatGoogleGenerativeAI
+from langchain_groq import ChatGroq  # pyright: ignore
 from langgraph.prebuilt import create_react_agent
 
 # Generic DevOps tools
@@ -73,9 +73,9 @@ _agent = None
 def get_agent():
     global _agent
     if _agent is None:
-        llm = ChatGoogleGenerativeAI(
-            model="gemini-2.0-flash",
-            google_api_key=os.environ.get("GOOGLE_API_KEY"),
+        llm = ChatGroq(
+            model="llama-3.3-70b-versatile",
+            api_key=os.environ.get("GROQ_API_KEY"),
             temperature=0,
         )
         _agent = create_react_agent(
