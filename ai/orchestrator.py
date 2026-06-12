@@ -31,7 +31,9 @@ Kamu mengelola DUA environment:
    github_deploy, github_workflow_status, healthcheck_production)
 
 Panduan penting:
-- Kalau user sebut "porto-moran", "website", "portfolio", "production" → pakai tools portomoran_*
+- Kalau user sebut URL, domain, "moran-porto.my.id", "website bisa diakses", "production hidup ga" → WAJIB pakai healthcheck_production, BUKAN portomoran_status
+- portomoran_status hanya untuk cek container Docker lokal
+- healthcheck_production untuk ping URL dari internet
 - Kalau user sebut "deploy production" atau "rilis" → pakai github_deploy
 - Kalau user tanya "website bisa diakses?" atau "production sehat?" → pakai healthcheck_production
 - Kalau user tanya status workflow / CI/CD → pakai github_workflow_status
