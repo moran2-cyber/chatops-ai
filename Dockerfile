@@ -8,7 +8,7 @@ COPY requirements.txt .
 RUN pip install --no-cache-dir --prefix=/install -r requirements.txt
 
 # Stage 2: Runtime
-FROM python:3.13-slim AS Runtime
+FROM python:3.13-slim AS runtime
 
 # Non-root user untuk keamanan 
 RUN useradd --create-home --shell /bin/bash chatops
